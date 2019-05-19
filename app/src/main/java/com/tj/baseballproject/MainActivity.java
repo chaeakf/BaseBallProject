@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.tj.baseballproject.adapters.ChatAdapter;
 import com.tj.baseballproject.databinding.ActivityMainBinding;
 import com.tj.baseballproject.datas.Chat;
 
@@ -20,6 +21,7 @@ public class MainActivity extends BaseActivity {
     int[] computerExamArray = new int[3]; // 741 => 7,4,1
 
     List<Chat> chatList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
 
                 chatList.add(new Chat(true, act.userInputEdt.getText().toString()));
+
 
                 checkStrikeAndBalls();
 
