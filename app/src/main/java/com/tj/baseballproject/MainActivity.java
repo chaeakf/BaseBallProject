@@ -21,6 +21,7 @@ public class MainActivity extends BaseActivity {
     int[] computerExamArray = new int[3]; // 741 => 7,4,1
 
     List<Chat> chatList = new ArrayList<>();
+    ChatAdapter mChatAdapter;
 
 
     @Override
@@ -40,6 +41,7 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
 
                 chatList.add(new Chat(true, act.userInputEdt.getText().toString()));
+                mChatAdapter.notifyDataSetChanged();
 
 
                 checkStrikeAndBalls();
@@ -78,11 +80,13 @@ public class MainActivity extends BaseActivity {
 //            Toast.makeText(mContext, "정답입니다! 축하합니다", Toast.LENGTH_SHORT).show();
 
             chatList.add(new Chat(false, "정답입니다! 축하합니다!"));
+            mChatAdapter.notifyDataSetChanged();
 
 
         } else {
 //           Toast.makeText(mContext, String.format("%dS, %dB입니다", strikeCount, ballCount), Toast.LENGTH_SHORT).show();
             chatList.add(new Chat(false, String.format("%dS, %dB 입니다.", strikeCount, ballCount)));
+            mChatAdapter.notifyDataSetChanged();
         }
 
     }
@@ -90,6 +94,9 @@ public class MainActivity extends BaseActivity {
     @Override
     public void setValues() {
         makeExam();
+
+        mChatAdapter = new ChatAdapter(mContext, chatList);
+        act.messageListView.setAdapter(mChatAdapter);
 
     }
 
